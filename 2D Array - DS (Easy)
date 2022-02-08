@@ -1,0 +1,47 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'hourglassSum' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts 2D_INTEGER_ARRAY arr as parameter.
+#
+
+def hourglassSum(arr):
+    rows = len(arr)
+    cols = len(arr[0])
+    maximum = ""
+    for i in range(rows-2):
+        for j in range(cols-2):
+            temp = arr[i][j] 
+            temp += arr[i][j+1]
+            temp += arr[i][j+2]
+            temp += arr[i+1][j+1]
+            temp += arr[i+2][j]
+            temp += arr[i+2][j+1]
+            temp += arr[i+2][j+2]
+            if (maximum == ""):
+                maximum = temp
+            elif (maximum < temp):
+                maximum = temp
+    return maximum
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr = []
+
+    for _ in range(6):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    result = hourglassSum(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
